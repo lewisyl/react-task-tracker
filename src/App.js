@@ -31,6 +31,7 @@ function App() {
 	const addTask = (task) => {
 		const id = Math.floor(Math.random() * 10000) + 1;
 		const newTask = { id, ...task };
+		// Pay attention - it has to be an ARRAY of tasks contains existing and new tasks
 		setTasks([...tasks, newTask]);
 	};
 
@@ -54,6 +55,10 @@ function App() {
 				onAdd={() => setShowAddTask(!showAddTask)}
 				showAdd={showAddTask}
 			/>
+			<p>
+				You can add and delete tasks. You can also double click the target task
+				to toggle the reminder.
+			</p>
 			{showAddTask && <AddTask onAdd={addTask} />}
 			{tasks.length > 0 ? (
 				<Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
