@@ -25,11 +25,18 @@ function App() {
 	};
 
 	// Add Task
-	const addTask = (task) => {
-		const id = Math.floor(Math.random() * 10000) + 1;
-		const newTask = { id, ...task };
-		// Pay attention - it has to be an ARRAY of tasks contains existing and new tasks
-		setTasks([...tasks, newTask]);
+	const addTask = async (task) => {
+		const res = await fetch(`http://localhost:5008/tasks`, {
+			method: "POST",
+			headers: {
+				"Content-type": "application/json",
+			},
+			body: JSON.stringify(task),
+		});
+
+		const data = await res.json();
+
+		setTasks([...tasks, data]);
 	};
 
 	// Delete Task
